@@ -19,12 +19,20 @@ const DishSchema = new mongoose.Schema({
     },
     dateDishCookedOn: {
         type: Date,
-        default: Date.now,
+        default: Date,
         required: true,
+    },
+    dishCuisine: {
+        type: String,
+        required: false,
     },
     dateDishAdded: {
         type: Date,
         default: Date.now
+    },
+    dishNotes: {
+        type: String,
+        required: false,
     },
     userId: {
         type: String,

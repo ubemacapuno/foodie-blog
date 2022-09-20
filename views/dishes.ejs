@@ -8,6 +8,69 @@
 </head>
 <body>
     <h1>Dishes App</h1>
-    
+    <section class="dishes-form">
+        <h2>Welcome, <%= user.userName %>! Add a Dish!</h2>
+        <a class="logout" href="/logout">Logout</a>
+        <form action="/dishes/createDishes" method='POST'>          
+
+            <label>Dish Name: </label>
+            <input type="text" placeholder="Dish Name" name='dishName' required>
+
+            <!-- Radio buttons for dish rating -->
+            <label>Dish Rating (1-5):</label>
+
+            <input type="radio" id="dishRating1" name='dishRating' value="1">
+            <label for="dishRating1">1</label>
+
+            <input type="radio" id="dishRating2" name='dishRating' value="2">
+            <label for="dishRating2">2</label>
+
+            <input type="radio" id="dishRating3" name='dishRating' value="3">
+            <label for="dishRating3">3</label>
+
+            <input type="radio" id="dishRating4" name='dishRating' value="4">
+            <label for="dishRating4">4</label>
+
+            <input type="radio" id="dishRating5" name='dishRating' value="5" checked>
+            <label for="dishRating5">5</label>
+
+            <label>Ingredients:</label>
+            <textarea name='dishIngredients' rows="5" cols="25" required></textarea>
+
+            <label>Instructions:</label>
+            <textarea name='dishInstructions' rows="5" cols="25" required></textarea>
+
+            <label>Cuisine:</label>
+            <input type="text" placeholder="Cuisine" name='dishCuisine' required>
+
+            <label>Date Initially Cooked:</label>
+            <input type='date' name='dateDishCookedOn' required>
+
+            <label>Notes:</label>
+            <textarea name='dishNotes' rows="5" cols="25"></textarea>
+
+            <input class="button" type="submit" value="Add">
+        </form>
+    </section>
+
+    <section class="dishes-list">
+        <h2>You have <%= total %> total dishes recorded.</h2>
+        <ul>
+        <% dishes.forEach( el => { %>
+            <li data-id="<%=el._id%>">
+                <span> <%= `Dish: ${el.dishName}` %></span><br />
+                <span> <%= `Rating: ${el.dishRating}` %></span><br />
+                <span> <%= `Ingredients: ${el.dishIngredients}` %></span><br />
+                <span> <%= `Dish Instructions: ${el.dishInstructions}` %></span><br />
+                <span> <%= `Date First Cooked: ${el.dateDishCookedOn.toDateString()}` %></span><br />
+                <span> <%= `Cuisine: ${el.dishCuisine}` %></span><br />
+                <span> <%= `Notes: ${el.dishNotes}` %></span><br />
+                <span class='del'> Delete </span>
+            </li><br />
+        <% }) %> 
+        </ul>
+
+    </section>
+    <script src="js/main.js"></script>
 </body>
 </html>

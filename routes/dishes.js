@@ -6,4 +6,7 @@ const { ensureAuth, ensureGuest } = require('../middleware/auth')
 router.get('/', ensureAuth, dishesController.getDishes)
 
 router.post('/createDishes', dishesController.createDishes)
+
+router.delete('/deleteDish', dishesController.deleteDish)
+
 module.exports = router
