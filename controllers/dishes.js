@@ -32,7 +32,6 @@ module.exports = {
         }
     },
 
-    // delete controller *using get request*
     deleteDish: async (req, res)=>{
         console.log("You have reached controller for deleteDish")
         console.log(req.body.dishIdFromJSFile)
