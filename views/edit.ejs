@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Dishes</title>
+    </head>
+    <body>
+        <% dishes.forEach(el => { %>
+            <!--Display like normal EXCEPT for what is being EDITED-->
+        <% if (el._id==idDish) { %>
+            <h1>Hey Chef <%= user.userName %>! Edit details for <%= el.dishName %>!</h1>
+            <span>Add/Delete ingredients for <%= el.dishName %> <a href="/ingredients/<%=el._id %>">HERE</a></span>
+            <ul>
+                <!-- Iterate through the dishIngredients array and place each item in an li element: -->
+                <% el.dishIngredients.forEach(function(item,index){ %>
+                    <li> <%= item %> 
+
+                        <!-- Ingredient Removal IN PROGRESS!
+                        <a href="/ingredients/removeIngredient/<%=el._id %>/<%=index %>">(Remove Ingredient)</a> -->
+
+                    </li>
+                <% }) %>
+        <% }})  %>
+            </ul>
+    </body>
+</html>
