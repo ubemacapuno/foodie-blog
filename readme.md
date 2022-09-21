@@ -63,8 +63,4 @@ $ yarn dev
  
 ## Optimizations:
 
-This application is in a minimal viable product state and is not commercial-ready. 
-In the future:
-- Include pagination 
-- Include a search function, filtering, sorting
-- Make memos specific to each contact, as opposed to having a pool with all memos together
+This application is a work in progress. I will update this section later!
