@@ -10,6 +10,7 @@ const connectDB = require('./config/database')
 const mainRoutes = require('./routes/main')
 const dishRoutes = require('./routes/dishes')
 const ingredientsRoutes = require('./routes/ingredients')
+const editRoutes = require('./routes/edit')
 
 require('dotenv').config({path: './config/.env'})
 
@@ -42,6 +43,7 @@ app.use(flash())
 app.use('/', mainRoutes)
 app.use('/dishes', dishRoutes)
 app.use('/ingredients', ingredientsRoutes)
+app.use('/edit', editRoutes)
  
 app.listen(process.env.PORT, ()=>{
     console.log(`Bruuuh, Express server is running, check PORT ${process.env.PORT}!`)

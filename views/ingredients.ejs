@@ -4,27 +4,38 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Dish Ingredients</title>
     </head>
     <body>
-        <h1>INGREDIENTS EJS</h1>
-
         <% dishes.forEach(el => { %>
-            <!--Display the capas like normal EXCEPT for the capa that is being EDITED-->
+            <!--Display like normal EXCEPT for what is being EDITED-->
         <% if (el._id==idDish) { %>
-            <h3 class="edit-header">Add Ingredients for <%= el.dishName %></h3>
-            <p>The current ingredients include: <%= el.dishIngredients %></p>
-                    <!-- Add a form for editing: -->
-                <form action="/ingredients/<%= dishes._id %>" method="POST">
+            <h1>Chef <%= user.userName %>! Add Ingredients for <%= el.dishName %> below!</h1>
+            <span>Current ingredients for <%= el.dishName %> (<%= el.dishIngredients.length %> total ingredients):</span>
+            <ul>
+                <!-- Iterate through the dishIngredients array and place each item in an li element: -->
+                <% el.dishIngredients.forEach(function(item,index){ %>
+                    <li> <%= item %> 
+
+                        <!-- Ingredient Removal IN PROGRESS!
+                        <a href="/ingredients/removeIngredient/<%=el._id %>/<%=index %>">(Remove Ingredient)</a> -->
+
+                    </li>
+                <% }) %>
+            </ul>
+
+                <!-- Add a form for editing: -->
+                <form action="/ingredients/<%= el._id %>" method="POST">
                     <!--In the form, show the values of the item you are trying to edit:-->
                     <!--CAPA Number-->
-                    <label><%= el.dishIngredients %></label>
+                    <label>Add 1 ingredient at a time:</label>
                     <input type="text" name="dishIngredients">
                 
                     <!--Confirm, cancel, edit dates buttons-->
                     <div class="edit-button-container">
-                        <button type="submit">Add Ingredients</button>
-                        <a href="/dishes" class="cancel">Go Back</a>
+                        <button type="submit">Add</button>
+                        <a href="/ingredients/reset/<%= el._id %>" class="cancel">Clear List</a>
+                        <a href="/dishes" class="cancel">HOME</a>
                     </div>
                 </form>
         <% }})  %>

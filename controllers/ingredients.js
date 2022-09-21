@@ -16,13 +16,48 @@ module.exports = {
 
     addIngredients: async (req, res)=>{
         const id = req.params.id;
+        console.log(`DEBUG ${req.body.dishName}`)
         try{
-            await Dish.findByIdAndUpdate(id,
+            await Dish.updateOne(
+                { _id: id},
                 {
-                    $push: { "dishIngredients": req.body.dishIngredients}
+                    $push: { dishIngredients: req.body.dishIngredients}
                 }),
-                console.log(`${req.user.userName} - addIngredients Controller.`)
-                res.redirect('/dishes')
+                console.log(`${req.user.userName} - addIngredients Controller, added ingredient ${req.body.dishName}`)
+                res.redirect(`/ingredients/${id}`)
+        }catch(err){
+            console.log(err)
+        }
+    },
+
+    resetIngredients: async (req, res)=>{
+        const id = req.params.id;
+        console.log(`DEBUG ${req.body.dishName}`)
+        try{
+            await Dish.findByIdAndUpdate(
+                id,
+                {
+                    dishIngredients: []
+                }),
+                console.log(`resetIngredients Controller, reset to ['']`)
+                res.redirect(`/ingredients/${id}`)
+        }catch(err){
+            console.log(err)
+        }
+    },
+
+    // WORK IN PROGRESS!
+    removeIngredients: async (req, res)=>{
+        const id = req.params.id;
+        console.log(`DEBUG ${req.body.dishName}`)
+        try{
+            await Dish.updateOne(
+                { _id: id},
+                {
+                    $pull: { dishIngredients: [`${req.body.dishIngredients}`]}
+                }),
+                console.log(`${req.user.userName} - addIngredients Controller, added ingredient ${req.body.dishName}`)
+                res.redirect(`/ingredients/${id}`)
         }catch(err){
             console.log(err)
         }
