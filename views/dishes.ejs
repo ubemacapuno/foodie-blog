@@ -34,17 +34,17 @@
             <input type="radio" id="dishRating5" name='dishRating' value="5" checked>
             <label for="dishRating5">5</label>
 
-            <label>Ingredients:</label>
-            <textarea name='dishIngredients' rows="5" cols="25" required></textarea>
-
-            <label>Instructions:</label>
-            <textarea name='dishInstructions' rows="5" cols="25" required></textarea>
-
             <label>Cuisine:</label>
             <input type="text" placeholder="Cuisine" name='dishCuisine' required>
 
             <label>Date Initially Cooked:</label>
             <input type='date' name='dateDishCookedOn' required>
+
+            <label>Instructions:</label>
+            <textarea name='dishInstructions' rows="5" cols="25" required></textarea>
+
+            <!-- <label>Ingredients:</label>
+            <textarea name='dishIngredients' rows="5" cols="25" required></textarea> -->
 
             <label>Notes:</label>
             <textarea name='dishNotes' rows="5" cols="25"></textarea>
@@ -65,7 +65,8 @@
                 <span> <%= `Date First Cooked: ${el.dateDishCookedOn.toDateString()}` %></span><br />
                 <span> <%= `Cuisine: ${el.dishCuisine}` %></span><br />
                 <span> <%= `Notes: ${el.dishNotes}` %></span><br />
-                <span class='del'> Delete </span>
+                <span class='del'>Remove Dish</span>
+                <a href="/ingredients/<%=el._id %>" class="edit">Ingredients</a>
             </li><br />
         <% }) %> 
         </ul>

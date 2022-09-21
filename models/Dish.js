@@ -10,12 +10,14 @@ const DishSchema = new mongoose.Schema({
         required: true
     },
     dishIngredients: {
-        type: String,
-        required: true
+        type: Array,
+        required: false,
+        default: []
     },
     dishInstructions: {
         type: String,
-        required: true
+        required: false,
+        default: ""
     },
     dateDishCookedOn: {
         type: Date,
@@ -33,6 +35,7 @@ const DishSchema = new mongoose.Schema({
     dishNotes: {
         type: String,
         required: false,
+        default: ""
     },
     userId: {
         type: String,
