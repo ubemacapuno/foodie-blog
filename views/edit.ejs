@@ -11,12 +11,44 @@
             <!--Display like normal EXCEPT for what is being EDITED-->
         <% if (el._id==idDish) { %>
             <h1>Hey Chef <%= user.userName %>! Edit details for <%= el.dishName %>!</h1>
+            <p>Current data for the editable fields:</p>
+
+            <form action="/edit/<%= el._id %>" method="POST">
+                <!--In the form, show the values of the item you are trying to edit:-->
+
+                <label>Dish Name:</label>
+                <input type="text" value="<%= el.dishName %>" name="dishName"><br />
+
+                <label>Rating:</label>
+                <select name="dishRating">
+                    <option value="<%= el.dishRating %>"><%= el.dishRating %>/5</option>
+                    <option value="" disabled>---Choose Options Below---</option>
+                    <option value="1">1/5</option>
+                    <option value="2">2/5</option>
+                    <option value="3">3/5</option>
+                    <option value="4">4/5</option>
+                    <option value="5">5/5</option>
+                </select><br />
+
+                <label>Cuisine:</label>
+                <input type="text" value="<%= el.dishCuisine %>" name="dishCuisine"><br />
+
+                <label>Instructions</label><br />
+                <textarea name="dishInstructions" rows="5" cols="25"><%= el.dishInstructions %></textarea><br />
+
+                <label>Notes</label><br />
+                <textarea name="dishNotes" rows="5" cols="25"><%= el.dishNotes %></textarea><br />
+                <input class="button" type="submit" value="Update">
+                <a href="/dishes" class="cancel">HOME</a>
+
+            </form>
+            <br />
+
             <span>Add/Delete ingredients for <%= el.dishName %> <a href="/ingredients/<%=el._id %>">HERE</a></span>
             <ul>
                 <!-- Iterate through the dishIngredients array and place each item in an li element: -->
                 <% el.dishIngredients.forEach(function(item,index){ %>
                     <li> <%= item %> 
-
                         <!-- Ingredient Removal IN PROGRESS!
                         <a href="/ingredients/removeIngredient/<%=el._id %>/<%=index %>">(Remove Ingredient)</a> -->
 

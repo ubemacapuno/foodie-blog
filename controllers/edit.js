@@ -26,7 +26,7 @@ module.exports = {
         }
     },
 
-    updateTask: (req, res) => {
+    updateDish: (req, res) => {
         const id = req.params.id;
         Dish.findByIdAndUpdate(//mongoose method
             id,
@@ -38,11 +38,10 @@ module.exports = {
                 dateDishCookedOn: req.body.dateDishCookedOn,
                 dishCuisine: req.body.dishCuisine,
                 dishNotes: req.body.dishNotes,
-                userId: req.user.id,
             },
             err => {
                 if (err) return res.status(500).send(err);
-                res.redirect("/edit");
+                res.redirect(`/dishes`);
             })
         }
 }

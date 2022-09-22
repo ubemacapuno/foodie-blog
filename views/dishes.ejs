@@ -70,9 +70,10 @@
                 </ul>
 
                 <span> <%= `Instructions: ${el.dishInstructions}` %></span><br />
-                <span> <%= `First Cooked: ${el.dateDishCookedOn.toDateString()}` %></span><br />
                 <span> <%= `Cuisine: ${el.dishCuisine}` %></span><br />
                 <span> <%= `Notes: ${el.dishNotes}` %></span><br />
+                <span> <%= `First Cooked: ${el.dateDishCookedOn.toDateString()}` %></span><br />
+                <a href="/edit/<%=el._id %>">Edit Dish</a><br />
                 <span class='del'>Remove Dish</span>
                 
             </li><br />
