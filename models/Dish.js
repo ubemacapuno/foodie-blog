@@ -6,7 +6,7 @@ const DishSchema = new mongoose.Schema({
         required: true
     },
     dishRating: {
-        type: Number,
+        type: String,
         required: true
     },
     dishIngredients: {
