@@ -7,102 +7,178 @@
     <link rel="stylesheet" href="/styles/style.css">
     <title>Recipes App</title>
 </head>
-<body>
-    <h1 class="text-5xl">Recipes App</h1>
-    <section class="dishes-form">
-        <!--Navbar-->
-        <nav class="relative container mx-auto p-6"></nav>
-        <!--flex container-->
-        <div class="flex flex-col items-center justify-between">
-            
+    <body>
+
+        <!--Navbar:-->
+        <nav class="relative container mx-auto">
+            <!--FLEX container:-->
             <div class="flex flex-col items-center justify-between">
-                <!--LOGO-->
-                <div class="pt-2">
-                    <!-- <img src="/images/logo.svg" alt="" /> -->
-                </div>
-                <!--Menu Items-->
-                <!-- On medium screens, div will show "flex" -->
-                <div class="hidden md:flex space-x-6"> 
-                    <a href="https://github.com/ubemacapuno/recipe-diary" class="hover:text-darkGrayishBLue">Repo</a>
-                    <a href="https://github.com/ubemacapuno">GitHub</a>
-                    <a href="www.linkedin.com/in/corey-damocles">LinkedIn</a>
-                    <a href="https://twitter.com/coreydamo">Twitter</a>
-                    <a href="/logout">Logout</a>
-                </div>
-                <!--button-->
-            </div>            
-        </div>
-        <h2>Welcome, <%= user.userName %>! Add a Dish!</h2>
-        <form action="/dishes/createDishes" method='POST'>          
+                <div class="flex flex-col items-center justify-between">
+                    <!--LOGO-->
+                    <div class="pt-2">
+                        <img src="/images/logo.jpg" alt="" />
+                    </div>
+                    <!--Nav-menu Items-->
+                    <!-- On medium screens, div will show "flex". Otherwise 'hidden' on small screens-->
+                    <div class="hidden md:flex space-x-6"> 
+                        <a href="#" class="hover:text-orange-500">Gallery</a>
+                        <a href="#" class="hover:text-orange-500">Feed</a>
+                        <a href="/logout" class="hover:text-orange-500">Logout</a>
+                        <a href="https://github.com/ubemacapuno/recipe-diary" class="hover:text-orange-500">Repository</a>
+                    </div>
+                </div>            
+                <h2 class="my-3 self-start">Hey, <%= user.userName %>! Add a Dish!</h2>
 
-            <label>Dish Name: </label>
-            <input type="text" placeholder="Dish Name" name='dishName' required>
+                <!--Form for Adding Dishes-->
+                <form class="w-full py-2 px-4 bg-gradient-to-r from-orange-300 to-yellow-200 flex flex-col items-start justify-between rounded-lg" action="/dishes/createDishes" method='POST'>
+                             
+                    <label class="mt-6 text-lg font-semibold" for="dishName">Dish Name: </label>
+                    <input type="text" name='dishName' class="" required>
 
-            <!-- Radio buttons for dish rating -->
-            <label>Dish Rating (1-5):</label>
+                    <!-- Radio buttons for dish rating -->
+                    <label class="mt-6 text-lg font-semibold" for="rating">Rating:</label>
+                    <fieldset class="rating">
+                    
+                        <input type="radio" id="star5" name="dishRating" value="5" />
+                        <label class = "full" for="star5" title="5 stars"></label>
 
-            <input type="radio" id="dishRating1" name='dishRating' value="1">
-            <label for="dishRating1">1</label>
+                        <input type="radio" id="star4half" name="dishRating" value="4.5" />
+                        <label class="half" for="star4half" title="4.5 stars"></label>
 
-            <input type="radio" id="dishRating2" name='dishRating' value="2">
-            <label for="dishRating2">2</label>
+                        <input type="radio" id="star4" name="dishRating" value="4" />
+                        <label class = "full" for="star4" title="4 stars"></label>
 
-            <input type="radio" id="dishRating3" name='dishRating' value="3">
-            <label for="dishRating3">3</label>
+                        <input type="radio" id="star3half" name="dishRating" value="3.5" />
+                        <label class="half" for="star3half" title="3.5 stars"></label>
 
-            <input type="radio" id="dishRating4" name='dishRating' value="4">
-            <label for="dishRating4">4</label>
+                        <input type="radio" id="star3" name="dishRating" value="3" />
+                        <label class = "full" for="star3" title="3 stars"></label>
 
-            <input type="radio" id="dishRating5" name='dishRating' value="5" checked>
-            <label for="dishRating5">5</label>
+                        <input type="radio" id="star2half" name="dishRating" value="2.5" />
+                        <label class="half" for="star2half" title="2.5 stars"></label>
 
-            <label>Cuisine:</label>
-            <input type="text" placeholder="Cuisine" name='dishCuisine' required>
+                        <input type="radio" id="star2" name="dishRating" value="2" />
+                        <label class = "full" for="star2" title="2 stars"></label>
 
-            <label>Date Initially Cooked:</label>
-            <input type='date' name='dateDishCookedOn' required>
+                        <input type="radio" id="star1half" name="dishRating" value="1.5" />
+                        <label class="half" for="star1half" title="1.5 stars"></label>
 
-            <label>Instructions:</label>
-            <textarea name='dishInstructions' rows="5" cols="25" required></textarea>
+                        <input type="radio" id="star1" name="dishRating" value="1" />
+                        <label class = "full" for="star1" title="1 star"></label>
 
-            <!-- <label>Ingredients:</label>
-            <textarea name='dishIngredients' rows="5" cols="25" required></textarea> -->
+                        <input type="radio" id="starhalf" name="dishRating" value="0.5" />
+                        <label class="half" for="starhalf" title="0.5 stars"></label>
 
-            <label>Notes:</label>
-            <textarea name='dishNotes' rows="5" cols="25"></textarea>
+                    </fieldset>
 
-            <input class="button" type="submit" value="Add">
-        </form>
-    </section>
+                    <!--Original Radio Buttons-->
 
-    <section class="dishes-list">
-        <h2>You have <%= total %> total dishes recorded.</h2>
-        <ul>
-        <% dishes.forEach( el => { %>
-            <li data-id="<%=el._id%>">
-                <span> <%= `${el.dishName}`%></span>
-                <span> <%= `Rating: ${el.dishRating}/5` %></span>
-                <span> <a href="/ingredients/<%=el._id %>">Ingredients (click to add/delete):</a></span>
+                    <!-- <input type="radio" name='dishRating' value="1">
+                    <label for="dishRating1">1</label>
 
-                <!-- Iterate through the dishIngredients array and place each item in an li element: -->
+                    <input type="radio" name='dishRating' value="2">
+                    <label for="dishRating2">2</label>
+
+                    <input type="radio" name='dishRating' value="3">
+                    <label for="dishRating3">3</label>
+
+                    <input type="radio" name='dishRating' value="4">
+                    <label for="dishRating4">4</label>
+
+                    <input type="radio" name='dishRating' value="5" checked>
+                    <label for="dishRating5">5</label> -->
+
+                    <label class="mt-6 text-lg font-semibold" for="dishCuisine">Cuisine:</label>
+                    <input type="text" name='dishCuisine' class="" required>
+
+                    <label class="mt-6 text-lg font-semibold" for="dateDishCookedOn">Date Initially Cooked:</label>
+                    <input type='date' name='dateDishCookedOn' class="" required>
+
+                    <label class="mt-6 text-lg font-semibold" for="dishInstructions">Instructions:</label>
+                    <textarea name='dishInstructions' rows="5" cols="50" class="" required></textarea>
+
+                    <label class="mt-6 text-lg font-semibold" for="dishNotes">Notes:</label>
+                    <textarea name='dishNotes' rows="5" cols="50" class=""></textarea>
+
+                    <input class="self-end my-6 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md cursor-pointer" type="submit" value="Add Dish">
+                </form>
+  
+
+                <!-- Dishes Iterated from the Database:-->
+                <h2>You have <%= total %> total dishes recorded.</h2>
                 <ul>
-                    <% el.dishIngredients.forEach(function(item,index){ %>
-                        <li> <%= item %> </li>
-                    <% }) %>
+                <% dishes.forEach( el => { %>
+                    <li data-id="<%=el._id%>">
+                        <h3> <%= `${el.dishName}`%></h3>
+                        <p> <%= `Rating: ${el.dishRating}/5` %></p>
+                        <p> <a href="/ingredients/<%=el._id %>">Ingredients (click to add/delete):</a></p>
+
+                        <!-- Iterate through the dishIngredients array and place each item in an li element: -->
+
+                        <ul>
+                            <% el.dishIngredients.forEach(function(item,index){ %>
+                                <li> <%= item %> </li>
+                            <% }) %>
+                        </ul>
+
+                        <p> <%= `Instructions: ${el.dishInstructions}` %></p>
+                        <p> <%= `Cuisine: ${el.dishCuisine}` %></p>
+                        <p> <%= `Notes: ${el.dishNotes}` %></p>
+                        <p> <%= `First Cooked: ${el.dateDishCookedOn.toDateString()}` %></p>
+                        <a href="/edit/<%=el._id %>">Edit Dish</a>
+                        <p class='del'>Remove Dish</p>
+                        
+                    </li>
+                <% }) %> 
                 </ul>
+            </div>
+        </nav>
 
-                <span> <%= `Instructions: ${el.dishInstructions}` %></span>
-                <span> <%= `Cuisine: ${el.dishCuisine}` %></span>
-                <span> <%= `Notes: ${el.dishNotes}` %></span>
-                <span> <%= `First Cooked: ${el.dateDishCookedOn.toDateString()}` %></span>
-                <a href="/edit/<%=el._id %>">Edit Dish</a>
-                <span class='del'>Remove Dish</span>
-                
-            </li>
-        <% }) %> 
-        </ul>
-
-    </section>
-    <script src="js/main.js"></script>
-</body>
+        <script src="js/main.js"></script>
+    </body>
 </html>
+<style>
+/* Styling for star rating */
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: rgb(255, 255, 255); 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #fe2e2e;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #ff8595;  } 
+</style>
