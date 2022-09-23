@@ -4,13 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/style.css">
     <title>Recipes App</title>
 </head>
 <body>
-    <h1>Recipes App</h1>
+    <h1 class="text-5xl">Recipes App</h1>
     <section class="dishes-form">
+        <!--Navbar-->
+        <nav class="relative container mx-auto p-6"></nav>
+        <!--flex container-->
+        <div class="flex flex-col items-center justify-between">
+            
+            <div class="flex flex-col items-center justify-between">
+                <!--LOGO-->
+                <div class="pt-2">
+                    <!-- <img src="/images/logo.svg" alt="" /> -->
+                </div>
+                <!--Menu Items-->
+                <!-- On medium screens, div will show "flex" -->
+                <div class="hidden md:flex space-x-6"> 
+                    <a href="https://github.com/ubemacapuno/recipe-diary" class="hover:text-darkGrayishBLue">Repo</a>
+                    <a href="https://github.com/ubemacapuno">GitHub</a>
+                    <a href="www.linkedin.com/in/corey-damocles">LinkedIn</a>
+                    <a href="https://twitter.com/coreydamo">Twitter</a>
+                    <a href="/logout">Logout</a>
+                </div>
+                <!--button-->
+            </div>            
+        </div>
         <h2>Welcome, <%= user.userName %>! Add a Dish!</h2>
-        <a class="logout" href="/logout">Logout</a>
         <form action="/dishes/createDishes" method='POST'>          
 
             <label>Dish Name: </label>
@@ -58,9 +80,9 @@
         <ul>
         <% dishes.forEach( el => { %>
             <li data-id="<%=el._id%>">
-                <span> <%= `${el.dishName}`%></span><br />
-                <span> <%= `Rating: ${el.dishRating}/5` %></span><br />
-                <span> <a href="/ingredients/<%=el._id %>">Ingredients (click to add/delete):</a></span><br />
+                <span> <%= `${el.dishName}`%></span>
+                <span> <%= `Rating: ${el.dishRating}/5` %></span>
+                <span> <a href="/ingredients/<%=el._id %>">Ingredients (click to add/delete):</a></span>
 
                 <!-- Iterate through the dishIngredients array and place each item in an li element: -->
                 <ul>
@@ -69,14 +91,14 @@
                     <% }) %>
                 </ul>
 
-                <span> <%= `Instructions: ${el.dishInstructions}` %></span><br />
-                <span> <%= `Cuisine: ${el.dishCuisine}` %></span><br />
-                <span> <%= `Notes: ${el.dishNotes}` %></span><br />
-                <span> <%= `First Cooked: ${el.dateDishCookedOn.toDateString()}` %></span><br />
-                <a href="/edit/<%=el._id %>">Edit Dish</a><br />
+                <span> <%= `Instructions: ${el.dishInstructions}` %></span>
+                <span> <%= `Cuisine: ${el.dishCuisine}` %></span>
+                <span> <%= `Notes: ${el.dishNotes}` %></span>
+                <span> <%= `First Cooked: ${el.dateDishCookedOn.toDateString()}` %></span>
+                <a href="/edit/<%=el._id %>">Edit Dish</a>
                 <span class='del'>Remove Dish</span>
                 
-            </li><br />
+            </li>
         <% }) %> 
         </ul>
 
