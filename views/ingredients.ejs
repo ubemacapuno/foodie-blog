@@ -10,9 +10,25 @@
         <% dishes.forEach(el => { %>
             <!--Display like normal EXCEPT for what is being EDITED-->
         <% if (el._id==idDish) { %>
+
             <h1>Chef <%= user.userName %>! Add Ingredients for <%= el.dishName %> below!</h1>
-            <span>Current ingredients for <%= el.dishName %> (<%= el.dishIngredients.length %> total ingredients):</span>
+            
+            <form action="/ingredients/<%= el._id %>" method="POST">
+                <!--In the form, show the values of the item you are trying to edit:-->
+                <!--CAPA Number-->
+                <label>Add 1 ingredient at a time:</label>
+                <input type="text" name="dishIngredients">
+            
+                <!--Confirm, cancel, edit dates buttons-->
+                <div class="edit-button-container">
+                    <button type="submit">Add</button>
+                    <a href="/ingredients/reset/<%= el._id %>" class="cancel">Clear List</a>
+                    <a href="/dishes" class="cancel">HOME</a>
+                </div>
+            </form>
+
             <ul>
+                <span>Current ingredients for <%= el.dishName %> (<%= el.dishIngredients.length %> total ingredients):</span>
                 <!-- Iterate through the dishIngredients array and place each item in an li element: -->
                 <% el.dishIngredients.forEach(function(item,index){ %>
                     <li> <%= item %> 
@@ -25,19 +41,7 @@
             </ul>
 
                 <!-- Add a form for editing: -->
-                <form action="/ingredients/<%= el._id %>" method="POST">
-                    <!--In the form, show the values of the item you are trying to edit:-->
-                    <!--CAPA Number-->
-                    <label>Add 1 ingredient at a time:</label>
-                    <input type="text" name="dishIngredients">
-                
-                    <!--Confirm, cancel, edit dates buttons-->
-                    <div class="edit-button-container">
-                        <button type="submit">Add</button>
-                        <a href="/ingredients/reset/<%= el._id %>" class="cancel">Clear List</a>
-                        <a href="/dishes" class="cancel">HOME</a>
-                    </div>
-                </form>
+          
         <% }})  %>
     </body>
 </html>

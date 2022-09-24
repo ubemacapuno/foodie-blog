@@ -7,6 +7,7 @@ module.exports = {
     './views/ingredients.ejs',
     './views/login.ejs',
     './views/signup.ejs',
+    './views/footer.ejs',
     './src/**/*.{html,js}',
   ],
   theme: {
