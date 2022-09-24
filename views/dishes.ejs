@@ -15,7 +15,7 @@
             <div class="flex flex-col items-center justify-between">
                 <div class="flex flex-col items-center justify-between">
                     <!--LOGO-->
-                    <div class="pt-2">
+                    <div class="px-4">
                         <img src="/images/logo.jpg" alt="" />
                     </div>
                     <!--Nav-menu Items-->
@@ -23,14 +23,14 @@
                     <div class="hidden md:flex space-x-6"> 
                         <a href="#" class="hover:text-orange-500">Gallery</a>
                         <a href="#" class="hover:text-orange-500">Feed</a>
-                        <a href="/logout" class="hover:text-orange-500">Logout</a>
                         <a href="https://github.com/ubemacapuno/recipe-diary" class="hover:text-orange-500">Repository</a>
+                        <a href="/logout" class="hover:text-orange-500">Logout</a>     
                     </div>
                 </div>            
-                <h2 class="my-3 self-start">Hey, <%= user.userName %>! Add a Dish!</h2>
+                <h2 class="p-4 text-2xl">Hi <span class="text-orange-500"><%= user.userName %></span>, add a Dish!</h2>
 
                 <!--Form for Adding Dishes-->
-                <form class="w-full py-2 px-4 bg-gradient-to-r from-orange-300 to-yellow-200 flex flex-col items-start justify-between rounded-lg" action="/dishes/createDishes" method='POST'>
+                <form class="w-11/12 py-2 px-4 bg-gradient-to-r from-orange-300 to-yellow-200 flex flex-col items-start justify-between rounded-lg" action="/dishes/createDishes" method='POST'>
                              
                     <label class="mt-6 text-lg font-semibold" for="dishName">Dish Name: </label>
                     <input type="text" name='dishName' class="" required>
@@ -105,12 +105,12 @@
   
 
                 <!-- Dishes Iterated from the Database:-->
-                <h2>You have <%= total %> total dishes recorded.</h2>
+                <h2 class="p-4 text-2xl">You blogged <span class="text-purple-500"><%= total %></span> total dishes:</h2>
                 <ul>
                 <% dishes.forEach( el => { %>
-                    <li data-id="<%=el._id%>">
-                        <h3> <%= `${el.dishName}`%></h3>
-                        <p> <%= `Rating: ${el.dishRating}/5` %></p>
+                    <li class="m-10" data-id="<%=el._id%>">
+                        <h3 class="text-xl font-bold text-purple-800"> <%= `${el.dishName}`%></h3>
+                        <p><i class="fa-solid fa-star star-rating"></i><%= `${el.dishRating}/5` %></p>
                         <p> <a href="/ingredients/<%=el._id %>">Ingredients (click to add/delete):</a></p>
 
                         <!-- Iterate through the dishIngredients array and place each item in an li element: -->
@@ -133,7 +133,6 @@
                 </ul>
             </div>
         </nav>
-
         <script src="js/main.js"></script>
     </body>
 </html>
@@ -141,9 +140,10 @@
 /* Styling for star rating */
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
-fieldset, label { margin: 0; padding: 0; }
-body{ margin: 20px; }
-h1 { font-size: 1.5em; margin: 10px; }
+fieldset { 
+    margin: 0; 
+    padding: 0; 
+}
 
 /****** Style Star Rating Widget *****/
 
@@ -155,7 +155,7 @@ h1 { font-size: 1.5em; margin: 10px; }
 .rating > input { display: none; } 
 .rating > label:before { 
   margin: 5px;
-  font-size: 1.25em;
+  font-size: 2em;
   font-family: FontAwesome;
   display: inline-block;
   content: "\f005";
@@ -169,6 +169,14 @@ h1 { font-size: 1.5em; margin: 10px; }
 .rating > label { 
   color: rgb(255, 255, 255); 
  float: right; 
+}
+
+.star-rating {
+    margin: 5px;
+    font-size: 2em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
 }
 
 /***** CSS Magic to Highlight Stars on Hover *****/
