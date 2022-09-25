@@ -8,7 +8,6 @@
     <title>Recipes App</title>
 </head>
     <body>
-
         <!--Navbar:-->
         <nav class="relative container mx-auto">
             <!--FLEX container:-->
@@ -105,32 +104,46 @@
   
 
                 <!-- Dishes Iterated from the Database:-->
-                <h2 class="p-4 text-2xl">You blogged <span class="text-purple-500"><%= total %></span> total dishes:</h2>
-                <ul>
-                <% dishes.forEach( el => { %>
-                    <li class="m-10" data-id="<%=el._id%>">
-                        <h3 class="text-xl font-bold text-purple-800"> <%= `${el.dishName}`%></h3>
-                        <p><i class="fa-solid fa-star star-rating"></i><%= `${el.dishRating}/5` %></p>
-                        <p> <a href="/ingredients/<%=el._id %>">Ingredients (click to add/delete):</a></p>
+                <h2 class="p-4 text-2xl">You have <span class="text-purple-500"><%= total %></span> total dishes:</h2>
+                <div class="w-11/12 py-2 px-4 bg-gradient-to-r from-purple-300 to-orange-200 flex flex-col items-center justify-between rounded-lg">
+                    <ul class="full">
+                        <% dishes.forEach( el => { %>
+                            <li class="m-10 rounded-lg bg-purple-200 mx-1 p-4"  data-id="<%=el._id%>">
+                                <div class="flex align-center justify-between">
+                                    <h3 class="text-2xl font-bold text-purple-800 py-3"> <%= `${el.dishName}`%></h3>
+                                    <a href="/edit/<%=el._id %>"><i class="fas fa-edit cursor-pointer"></i></a>
+                                </div>
 
-                        <!-- Iterate through the dishIngredients array and place each item in an li element: -->
+                                <i class="py-3 fas fa-star"></i><%= ` ${el.dishRating}/5` %>
+                                <span class="text-purple-800 text-lg font-semibold block pt-4"> Ingredients:<span class="block font-semibold text-orange-600"><a  href="/ingredients/<%=el._id %>">(click to add/delete ingredients)</span></a></span>
+        
+                                <!-- Iterate through the dishIngredients array and place each item in an li element: -->
+        
+                                <ul>
+                                    <% el.dishIngredients.forEach(function(item,index){ %>
+                                        <li><%=`- ${item}`%></li>
+                                    <% }) %>
+                                </ul>
+        
+                                <span class="inline-block pt-4 text-purple-800 text-lg font-semibold">Instructions: </span>
+                                <p><%= `${el.dishInstructions}` %></p>
 
-                        <ul>
-                            <% el.dishIngredients.forEach(function(item,index){ %>
-                                <li> <%= item %> </li>
-                            <% }) %>
-                        </ul>
+                                <span class="inline-block pt-4 text-purple-800 text-lg font-semibold">Cuisine: </span>
+                                <p> <%= `${el.dishCuisine}` %></p>
 
-                        <p> <%= `Instructions: ${el.dishInstructions}` %></p>
-                        <p> <%= `Cuisine: ${el.dishCuisine}` %></p>
-                        <p> <%= `Notes: ${el.dishNotes}` %></p>
-                        <p> <%= `First Cooked: ${el.dateDishCookedOn.toDateString()}` %></p>
-                        <a href="/edit/<%=el._id %>">Edit Dish</a>
-                        <p class='del'>Remove Dish</p>
-                        
-                    </li>
-                <% }) %> 
-                </ul>
+                                <span class="inline-block pt-4 text-purple-800 text-lg font-semibold">Notes: </span>
+                                <p> <%= `${el.dishNotes}` %></p>
+
+                                <span class="inline-block pt-4 text-purple-800 text-lg font-semibold">First Cooked: </span>
+                                <p> <%= `${el.dateDishCookedOn.toDateString()}` %></p>
+
+                                <a href="/edit/<%=el._id %>">Edit Dish</a>
+                                <p class='del'>Remove Dish</p>
+                                
+                            </li>
+                    <% }) %> 
+                    </ul>
+                </div>
             </div>
         </nav>
         <script src="js/main.js"></script>
