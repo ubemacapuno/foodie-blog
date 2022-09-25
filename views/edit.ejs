@@ -1,60 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edit Dishes</title>
-    </head>
-    <body>
-        <% dishes.forEach(el => { %>
-            <!--Display like normal EXCEPT for what is being EDITED-->
-        <% if (el._id==idDish) { %>
-            <h1>Hey Chef <%= user.userName %>! Edit details for <%= el.dishName %>!</h1>
-            <p>Current data for the editable fields:</p>
+edit.ejs
+<%- include('partials/header') -%>
+    <% dishes.forEach(el => { %>
+        <!--Display like normal EXCEPT for what is being EDITED-->
+    <% if (el._id==idDish) { %>
+        <h1>Hey Chef <%= user.userName %>! Edit details for <%= el.dishName %>!</h1>
+        <p>Current data for the editable fields:</p>
 
-            <form action="/edit/<%= el._id %>" method="POST">
-                <!--In the form, show the values of the item you are trying to edit:-->
+        <form class="w-11/12 py-2 px-4 bg-gradient-to-r from-purple-300 to-orange-200 flex flex-col items-start justify-between rounded-lg" action="/edit/<%= el._id %>" method="POST">
+            <!--In the form, show the values of the item you are trying to edit:-->
 
-                <label>Dish Name:</label>
-                <input type="text" value="<%= el.dishName %>" name="dishName"><br />
+            <label>Dish Name:</label>
+            <input type="text" value="<%= el.dishName %>" name="dishName"><br />
 
-                <label>Rating:</label>
-                <select name="dishRating">
-                    <option value="<%= el.dishRating %>"><%= el.dishRating %>/5</option>
-                    <option value="" disabled>---Choose Options Below---</option>
-                    <option value="1">1/5</option>
-                    <option value="2">2/5</option>
-                    <option value="3">3/5</option>
-                    <option value="4">4/5</option>
-                    <option value="5">5/5</option>
-                </select><br />
 
-                <label>Cuisine:</label>
-                <input type="text" value="<%= el.dishCuisine %>" name="dishCuisine"><br />
+            <label for="rating">Rating: <span><%= el.dishRating %></span></label>
+                <fieldset class="rating">
+                
+                    <input type="radio" id="star5" name="dishRating" value="5" />
+                    <label class = "full" for="star5" title="5 stars"></label>
 
-                <label>Instructions</label><br />
-                <textarea name="dishInstructions" rows="5" cols="25"><%= el.dishInstructions %></textarea><br />
+                    <input type="radio" id="star4half" name="dishRating" value="4.5" />
+                    <label class="half" for="star4half" title="4.5 stars"></label>
 
-                <label>Notes</label><br />
-                <textarea name="dishNotes" rows="5" cols="25"><%= el.dishNotes %></textarea><br />
-                <input class="button" type="submit" value="Update">
-                <a href="/dishes" class="cancel">HOME</a>
+                    <input type="radio" id="star4" name="dishRating" value="4" />
+                    <label class = "full" for="star4" title="4 stars"></label>
 
-            </form>
-            <br />
+                    <input type="radio" id="star3half" name="dishRating" value="3.5" />
+                    <label class="half" for="star3half" title="3.5 stars"></label>
 
-            <span>Add/Delete ingredients for <%= el.dishName %> <a href="/ingredients/<%=el._id %>">HERE</a></span>
-            <ul>
-                <!-- Iterate through the dishIngredients array and place each item in an li element: -->
-                <% el.dishIngredients.forEach(function(item,index){ %>
-                    <li> <%= item %> 
-                        <!-- Ingredient Removal IN PROGRESS!
-                        <a href="/ingredients/removeIngredient/<%=el._id %>/<%=index %>">(Remove Ingredient)</a> -->
+                    <input type="radio" id="star3" name="dishRating" value="3" />
+                    <label class = "full" for="star3" title="3 stars"></label>
 
-                    </li>
-                <% }) %>
-        <% }})  %>
-            </ul>
-    </body>
-</html>
+                    <input type="radio" id="star2half" name="dishRating" value="2.5" />
+                    <label class="half" for="star2half" title="2.5 stars"></label>
+
+                    <input type="radio" id="star2" name="dishRating" value="2" />
+                    <label class = "full" for="star2" title="2 stars"></label>
+
+                    <input type="radio" id="star1half" name="dishRating" value="1.5" />
+                    <label class="half" for="star1half" title="1.5 stars"></label>
+
+                    <input type="radio" id="star1" name="dishRating" value="1" />
+                    <label class = "full" for="star1" title="1 star"></label>
+
+                    <input type="radio" id="starhalf" name="dishRating" value="0.5" />
+                    <label class="half" for="starhalf" title="0.5 stars"></label>
+
+                </fieldset>
+
+            <label>Cuisine:</label>
+            <input type="text" value="<%= el.dishCuisine %>" name="dishCuisine"><br />
+
+            <label>Instructions</label><br />
+            <textarea name="dishInstructions" rows="5" cols="25"><%= el.dishInstructions %></textarea><br />
+
+            <label>Notes</label><br />
+            <textarea name="dishNotes" rows="5" cols="25"><%= el.dishNotes %></textarea><br />
+            <input class="button" type="submit" value="Update">
+            <a href="/dishes" class="cancel">HOME</a>
+
+        </form>
+        <br />
+
+        <span>Add/Delete ingredients for <%= el.dishName %> <a href="/ingredients/<%=el._id %>">HERE</a></span>
+        <ul>
+            <!-- Iterate through the dishIngredients array and place each item in an li element: -->
+            <% el.dishIngredients.forEach(function(item,index){ %>
+                <li> <%= item %> 
+                    <!-- Ingredient Removal IN PROGRESS!
+                    <a href="/ingredients/removeIngredient/<%=el._id %>/<%=index %>">(Remove Ingredient)</a> -->
+
+                </li>
+            <% }) %>
+    <% }})  %>
+        </ul>
+<%- include('partials/footer') -%>
+<style>
+    /* Styling for star rating */
+    @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+    
+    fieldset { 
+        margin: 0; 
+        padding: 0; 
+    }
+    
+    /****** Style Star Rating Widget *****/
+    
+    .rating { 
+      border: none;
+      float: left;
+    }
+    
+    .rating > input { display: none; } 
+    .rating > label:before { 
+      margin: 5px;
+      font-size: 2em;
+      font-family: FontAwesome;
+      display: inline-block;
+      content: "\f005";
+    }
+    
+    .rating > .half:before { 
+      content: "\f089";
+      position: absolute;
+    }
+    
+    .rating > label { 
+      color: rgb(255, 255, 255); 
+     float: right; 
+    }
+    /***** CSS Magic to Highlight Stars on Hover *****/
+    
+    .rating > input:checked ~ label, /* show gold star when clicked */
+    .rating:not(:checked) > label:hover, /* hover current star */
+    .rating:not(:checked) > label:hover ~ label { color: #fe2e2e;  } /* hover previous stars in list */
+    
+    .rating > input:checked + label:hover, /* hover current star when changing rating */
+    .rating > input:checked ~ label:hover,
+    .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+    .rating > input:checked ~ label:hover ~ label { color: #ff8595;  } 
+    </style>
