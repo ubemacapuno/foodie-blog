@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/styles/style.css">
     </head>
     <body class="min-h-full flex flex-col">
-        <nav class="relative container mx-auto">
+        <div class="relative container mx-auto">
             <div class="flex flex-col items-center justify-between">
                 <div class="px-4">
                     <img src="/images/logo.jpg" alt="" />
@@ -18,46 +18,5 @@
                     <a class="inline-block align-middle text-center h-10 leading-10 w-40 bg-purple-400 hover:bg-purple-700 text-white font-bold rounded-lg cursor-pointer m-10" href="/signup">Signup</a>
                 </div>
             </div>
-        </nav>
-        <%- include('partials/footer') -%>
-
-ingredients.ejs
-<%- include('partials/header') -%>
-    <body class="min-h-full flex flex-col">
-        <% dishes.forEach(el => { %>
-            <!--Display like normal EXCEPT for what is being EDITED-->
-        <% if (el._id==idDish) { %>
-
-            <h1>Chef <%= user.userName %>! Add Ingredients for <%= el.dishName %> below!</h1>
-            
-            <form action="/ingredients/<%= el._id %>" method="POST">
-                <!--In the form, show the values of the item you are trying to edit:-->
-                <!--CAPA Number-->
-                <label>Add 1 ingredient at a time:</label>
-                <input type="text" name="dishIngredients">
-            
-                <!--Confirm, cancel, edit dates buttons-->
-                <div class="edit-button-container">
-                    <button type="submit">Add</button>
-                    <a href="/ingredients/reset/<%= el._id %>" class="cancel">Clear List</a>
-                    <a href="/dishes" class="cancel">HOME</a>
-                </div>
-            </form>
-
-            <ul>
-                <span>Current ingredients for <%= el.dishName %> (<%= el.dishIngredients.length %> total ingredients):</span>
-                <!-- Iterate through the dishIngredients array and place each item in an li element: -->
-                <% el.dishIngredients.forEach(function(item,index){ %>
-                    <li> <%= item %> 
-
-                        <!-- Ingredient Removal IN PROGRESS!
-                        <a href="/ingredients/removeIngredient/<%=el._id %>/<%=index %>">(Remove Ingredient)</a> -->
-
-                    </li>
-                <% }) %>
-            </ul>
-
-                <!-- Add a form for editing: -->
-          
-        <% }})  %>
+        </div>
         <%- include('partials/footer') -%>

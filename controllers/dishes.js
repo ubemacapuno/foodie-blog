@@ -42,5 +42,15 @@ module.exports = {
         }catch(err){
             console.log(err)
         }
-    }
+    },
+
+    removeDish: (req,res) => {
+        console.log("You have reached controller for deleteDish")
+        console.log(req.params.id)
+        const id = req.params.id
+        Dish.findByIdAndRemove(id, err => {
+            if (err) return res.status(500).send(err)
+            res.redirect('/dishes')
+        })
+    },
 } 
