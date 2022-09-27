@@ -47,6 +47,6 @@ app.use('/dishes', dishRoutes)
 app.use('/ingredients', ingredientsRoutes)
 app.use('/edit', editRoutes)
  
-app.listen(process.env.PORT || PORT, () => {
+app.listen(process.env.PORT, () => {
     console.log(`Bruuuh, Express server is running, check PORT ${process.env.PORT}!`)
 })    
