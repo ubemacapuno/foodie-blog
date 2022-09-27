@@ -3,8 +3,8 @@
 Are you sick of having to scroll through a slow-loading ad-infested website and a 300+ word life story when you just want to see ingredients and instructions for a recipe you've used before?! Look no further! Log your recipes on this app and never have to go through that horrid experience ever again!
 
  <tr>
-  <td width="50%"  style="align:center;" valign="top">
-          <img src="https://github.com/ubemacapuno/images-for-github-readme/blob/main/foodie-blog.gif?raw=true" width="50%"  alt="Contact and Memo App Demo .gif"/>
+  <td width="30%"  style="align:center;" valign="top">
+          <img src="https://github.com/ubemacapuno/images-for-github-readme/blob/main/foodie-blog.gif?raw=true" width="30%"  alt="Contact and Memo App Demo .gif"/>
   </td>
 </tr> 
 
