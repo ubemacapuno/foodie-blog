@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const mongoose = require('mongoose')
 const passport = require('passport')
 const session = require('express-session')
@@ -14,7 +15,7 @@ const editRoutes = require('./routes/edit')
 const path = require('path');
 
 require('dotenv').config({path: './config/.env'})
-
+app.use(cors())
 // Passport config
 require('./config/passport')(passport)
 
@@ -46,6 +47,6 @@ app.use('/dishes', dishRoutes)
 app.use('/ingredients', ingredientsRoutes)
 app.use('/edit', editRoutes)
  
-app.listen(process.env.PORT, ()=>{
+app.listen(process.env.PORT || PORT, () => {
     console.log(`Bruuuh, Express server is running, check PORT ${process.env.PORT}!`)
 })    
