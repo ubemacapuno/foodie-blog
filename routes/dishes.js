@@ -9,4 +9,6 @@ router.post('/createDishes', dishesController.createDishes)
 
 router.delete('/deleteDish', dishesController.deleteDish)
 
+router.delete('/removeDish/:id', dishesController.removeDish)
+
 module.exports = router
