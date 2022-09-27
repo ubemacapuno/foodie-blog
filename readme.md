@@ -2,11 +2,11 @@
 ## Introduction
 Are you sick of having to scroll through a slow-loading ad-infested website and a 300+ word life story when you just want to see ingredients and instructions for a recipe you've used before?! Look no further! Log your recipes on this app and never have to go through that horrid experience ever again!
 
-<!-- <tr>
+ <tr>
   <td width="100%"  style="align:center;" valign="top">
-          <img src="https://github.com/ubemacapuno/images-for-github-readme/blob/main/contact-list-and-memos-app.gif?raw=true" width="100%"  alt="Contact and Memo App Demo .gif"/>
+          <img src="https://github.com/ubemacapuno/images-for-github-readme/blob/main/foodie-blog.gif?raw=true" width="100%"  alt="Contact and Memo App Demo .gif"/>
   </td>
-</tr> -->
+</tr> 
 
 ---
 
