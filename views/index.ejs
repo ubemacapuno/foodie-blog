@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <!-- <link rel="stylesheet" href="css/style.css"> -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FoodieBlog</title>
+        <link rel="stylesheet" href="/styles/style.css">
     </head>
-    <body>
-        <h1>Recipes App</h1>
-        <a class="button" href="/login"> Login</a>
-        <a class="button" href="/signup"> Signup</a>
-    </body>
-</html>
+    <body class="min-h-full flex flex-col">
+        <div class="relative container mx-auto">
+            <div class="flex flex-col items-center justify-between">
+                <div class="px-4">
+                    <img src="/images/logo.jpg" alt="" />
+                </div>
+                <div class="flex flex-col pt-10">
+                    <a class="inline-block align-middle text-center h-10 leading-10 w-40 bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-lg cursor-pointer m-10" href="/login">Login</a>
+                    <a class="inline-block align-middle text-center h-10 leading-10 w-40 bg-purple-400 hover:bg-purple-700 text-white font-bold rounded-lg cursor-pointer m-10" href="/signup">Signup</a>
+                </div>
+            </div>
+        </div>
+        <%- include('partials/footer') -%>

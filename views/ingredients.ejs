@@ -1,43 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dish Ingredients</title>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FoodieBlog</title>
+        <link rel="icon" href="/images/favicon.ico">
+        <link rel="stylesheet" href="/styles/style.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     </head>
-    <body>
-        <% dishes.forEach(el => { %>
-            <!--Display like normal EXCEPT for what is being EDITED-->
-        <% if (el._id==idDish) { %>
-            <h1>Chef <%= user.userName %>! Add Ingredients for <%= el.dishName %> below!</h1>
-            <span>Current ingredients for <%= el.dishName %> (<%= el.dishIngredients.length %> total ingredients):</span>
-            <ul>
-                <!-- Iterate through the dishIngredients array and place each item in an li element: -->
-                <% el.dishIngredients.forEach(function(item,index){ %>
-                    <li> <%= item %> 
+    <body class="min-h-full flex flex-col">
+        <nav class="relative container mx-auto">
+            <div class="flex flex-col items-center justify-between">
+                <div class="px-4">
+                    <a href="/dishes"><img src="/images/logo.jpg" alt="FoodieBlog Logo and Home Link" /></a>
+                </div>
+            </div>
+        </nav>
+        <div class="relative container mx-auto">
+            <!--FLEX container:-->
+            <div class="flex flex-col items-center justify-between">
+                <%- include('partials/nav') -%>                
+                <% dishes.forEach(el => { %>
+                    <!--Display like normal EXCEPT for what is being EDITED-->
+               
+                <% if (el._id==idDish) { %>
+                <h1 class="p-4 text-center text-2xl">Hi <%= user.userName %>,</h1>
+                <h3 class="pb-4 text-lg text-center">Add Ingredients for <span class="text-purple-500 font-semibold"><%= el.dishName %></span> below!</h3>
 
-                        <!-- Ingredient Removal IN PROGRESS!
-                        <a href="/ingredients/removeIngredient/<%=el._id %>/<%=index %>">(Remove Ingredient)</a> -->
-
-                    </li>
-                <% }) %>
-            </ul>
-
-                <!-- Add a form for editing: -->
-                <form action="/ingredients/<%= el._id %>" method="POST">
+                <form class="w-11/12 py-2 px-4 bg-gradient-to-r from-purple-300 to-orange-200 flex flex-col items-start justify-between rounded-lg" action="/ingredients/<%= el._id %>" method="POST">
                     <!--In the form, show the values of the item you are trying to edit:-->
                     <!--CAPA Number-->
-                    <label>Add 1 ingredient at a time:</label>
-                    <input type="text" name="dishIngredients">
+                    <label class="text-lg text-purple-800 font-semibold py-4">Add 1 ingredient at a time:</label>
+                    <input type="text" name="dishIngredients" autofocus>
                 
-                    <!--Confirm, cancel, edit dates buttons-->
-                    <div class="edit-button-container">
-                        <button type="submit">Add</button>
-                        <a href="/ingredients/reset/<%= el._id %>" class="cancel">Clear List</a>
-                        <a href="/dishes" class="cancel">HOME</a>
-                    </div>
+                    <!--Confirm-->
+                    <button type="submit" class="block w-24 self-end my-3 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md cursor-pointer text-center">Add</button>
+                        
                 </form>
-        <% }})  %>
+                <div class="w-11/12 mt-6 py-2 px-4 bg-gradient-to-r from-orange-200 to-green-100 flex flex-col items-start justify-between rounded-lg">
+                    <ul>
+                        <h3 class="text-xl text-purple-800 font-semibold py-4"><%= el.dishIngredients.length %> total ingredients for <%= el.dishName %>:</h3>
+                        <!-- Iterate through the dishIngredients array and place each item in an li element: -->
+                        <% el.dishIngredients.forEach(function(item,index){ %>
+                        <li> <%= `- ${item}`%> 
+
+                            <!-- Ingredient Removal IN PROGRESS!
+                            <a href="/ingredients/removeIngredient/<%=el._id %>/<%=index %>">(Remove Ingredient)</a> -->
+
+                        </li>
+                        <% }) %>
+                    </ul> 
+                    <a href="/ingredients/reset/<%= el._id %>" class="block w-24 self-end my-3 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md cursor-pointer text-center">Clear</a>
+                    <a href="/dishes" class="block w-24 self-end my-3 bg-purple-400 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-md cursor-pointer text-center">Home</a>
+                </div>
+                <% }})  %>
+            </div>
+        </div>
+        <footer class="font-semibold mt-auto py-8 text-center">
+        © 2022 <a target="_blank" class="text-purple-500 hover:text-purple-700 cursor-pointer" href="https://github.com/ubemacapuno">Corey Damocles</a>
+        </footer>
+        <script src="js/main.js"></script>
     </body>
 </html>

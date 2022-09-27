@@ -1,86 +1,188 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipes App</title>
-</head>
-<body>
-    <h1>Recipes App</h1>
-    <section class="dishes-form">
-        <h2>Welcome, <%= user.userName %>! Add a Dish!</h2>
-        <a class="logout" href="/logout">Logout</a>
-        <form action="/dishes/createDishes" method='POST'>          
+<%- include('partials/header') -%>
+    <div class="relative container mx-auto">
+        <!--FLEX container:-->
+        <div class="flex flex-col items-center justify-between">
+            <%- include('partials/nav') -%>          
+            <h2 class="p-4 text-2xl">Hi <span class="text-orange-500"><%= user.userName %></span>, add a Dish!</h2>
 
-            <label>Dish Name: </label>
-            <input type="text" placeholder="Dish Name" name='dishName' required>
+            <!--Form for Adding Dishes-->
+            <form class="w-11/12 py-2 px-4 bg-gradient-to-r from-orange-300 to-yellow-200 flex flex-col items-start justify-between rounded-lg" action="/dishes/createDishes" method='POST'>
+                            
+                <label class="mt-6 text-lg font-semibold" for="dishName">Dish Name: </label>
+                <input type="text" name='dishName' class="" required>
 
-            <!-- Radio buttons for dish rating -->
-            <label>Dish Rating (1-5):</label>
-
-            <input type="radio" id="dishRating1" name='dishRating' value="1">
-            <label for="dishRating1">1</label>
-
-            <input type="radio" id="dishRating2" name='dishRating' value="2">
-            <label for="dishRating2">2</label>
-
-            <input type="radio" id="dishRating3" name='dishRating' value="3">
-            <label for="dishRating3">3</label>
-
-            <input type="radio" id="dishRating4" name='dishRating' value="4">
-            <label for="dishRating4">4</label>
-
-            <input type="radio" id="dishRating5" name='dishRating' value="5" checked>
-            <label for="dishRating5">5</label>
-
-            <label>Cuisine:</label>
-            <input type="text" placeholder="Cuisine" name='dishCuisine' required>
-
-            <label>Date Initially Cooked:</label>
-            <input type='date' name='dateDishCookedOn' required>
-
-            <label>Instructions:</label>
-            <textarea name='dishInstructions' rows="5" cols="25" required></textarea>
-
-            <!-- <label>Ingredients:</label>
-            <textarea name='dishIngredients' rows="5" cols="25" required></textarea> -->
-
-            <label>Notes:</label>
-            <textarea name='dishNotes' rows="5" cols="25"></textarea>
-
-            <input class="button" type="submit" value="Add">
-        </form>
-    </section>
-
-    <section class="dishes-list">
-        <h2>You have <%= total %> total dishes recorded.</h2>
-        <ul>
-        <% dishes.forEach( el => { %>
-            <li data-id="<%=el._id%>">
-                <span> <%= `${el.dishName}`%></span><br />
-                <span> <%= `Rating: ${el.dishRating}/5` %></span><br />
-                <span> <a href="/ingredients/<%=el._id %>">Ingredients (click to add/delete):</a></span><br />
-
-                <!-- Iterate through the dishIngredients array and place each item in an li element: -->
-                <ul>
-                    <% el.dishIngredients.forEach(function(item,index){ %>
-                        <li> <%= item %> </li>
-                    <% }) %>
-                </ul>
-
-                <span> <%= `Instructions: ${el.dishInstructions}` %></span><br />
-                <span> <%= `Cuisine: ${el.dishCuisine}` %></span><br />
-                <span> <%= `Notes: ${el.dishNotes}` %></span><br />
-                <span> <%= `First Cooked: ${el.dateDishCookedOn.toDateString()}` %></span><br />
-                <a href="/edit/<%=el._id %>">Edit Dish</a><br />
-                <span class='del'>Remove Dish</span>
+                <!-- Radio buttons for dish rating -->
+                <label class="mt-6 text-lg font-semibold" for="rating">Rating:</label>
+                <fieldset class="rating">
                 
-            </li><br />
-        <% }) %> 
-        </ul>
+                    <input type="radio" id="star5" name="dishRating" value="5" />
+                    <label class = "full" for="star5" title="5 stars"></label>
 
-    </section>
-    <script src="js/main.js"></script>
-</body>
-</html>
+                    <input type="radio" id="star4half" name="dishRating" value="4.5" />
+                    <label class="half" for="star4half" title="4.5 stars"></label>
+
+                    <input type="radio" id="star4" name="dishRating" value="4" />
+                    <label class = "full" for="star4" title="4 stars"></label>
+
+                    <input type="radio" id="star3half" name="dishRating" value="3.5" />
+                    <label class="half" for="star3half" title="3.5 stars"></label>
+
+                    <input type="radio" id="star3" name="dishRating" value="3" />
+                    <label class = "full" for="star3" title="3 stars"></label>
+
+                    <input type="radio" id="star2half" name="dishRating" value="2.5" />
+                    <label class="half" for="star2half" title="2.5 stars"></label>
+
+                    <input type="radio" id="star2" name="dishRating" value="2" />
+                    <label class = "full" for="star2" title="2 stars"></label>
+
+                    <input type="radio" id="star1half" name="dishRating" value="1.5" />
+                    <label class="half" for="star1half" title="1.5 stars"></label>
+
+                    <input type="radio" id="star1" name="dishRating" value="1" />
+                    <label class = "full" for="star1" title="1 star"></label>
+
+                    <input type="radio" id="starhalf" name="dishRating" value="0.5" />
+                    <label class="half" for="starhalf" title="0.5 stars"></label>
+
+                </fieldset>
+
+                <!--Original Radio Buttons-->
+
+                <!-- <input type="radio" name='dishRating' value="1">
+                <label for="dishRating1">1</label>
+
+                <input type="radio" name='dishRating' value="2">
+                <label for="dishRating2">2</label>
+
+                <input type="radio" name='dishRating' value="3">
+                <label for="dishRating3">3</label>
+
+                <input type="radio" name='dishRating' value="4">
+                <label for="dishRating4">4</label>
+
+                <input type="radio" name='dishRating' value="5" checked>
+                <label for="dishRating5">5</label> -->
+
+                <label class="mt-6 text-lg font-semibold" for="dishCuisine">Cuisine:</label>
+                <input type="text" name='dishCuisine' class="" required>
+
+                <label class="mt-6 text-lg font-semibold" for="dateDishCookedOn">Date Initially Cooked:</label>
+                <input type='date' name='dateDishCookedOn' class="" required>
+
+                <label class="mt-6 text-lg font-semibold" for="dishInstructions">Instructions:</label>
+                <textarea name='dishInstructions' rows="5" cols="50" class="" required></textarea>
+
+                <label class="mt-6 text-lg font-semibold" for="dishNotes">Notes:</label>
+                <textarea name='dishNotes' rows="5" cols="50" class=""></textarea>
+
+                <input class="self-end my-6 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md cursor-pointer" type="submit" value="Add Dish">
+            </form>
+
+
+            <!-- Dishes Iterated from the Database:-->
+           
+            <div class="mt-6 w-11/12 py-2 px-4 bg-gradient-to-r from-purple-300 to-orange-200 flex flex-col items-center justify-between rounded-lg">
+                <h2 class="p-4 text-2xl">You have <span class="text-purple-500"><%= total %></span> dishes blogged:</h2>
+                <ul class="full">
+                    <% dishes.forEach( el => { %>
+                        <li class="m-10 rounded-lg bg-violet-50 mx-1 p-4 flex flex-col items-start justify-between"  data-id="<%=el._id%>">
+
+                            <h3 class="text-2xl text-justify font-bold text-purple-800 py-3"> <%= `${el.dishName}`%></h3>
+
+                            <span class="py-3 fas fa-star text-lg"><%= ` ${el.dishRating} / 5` %></span>
+
+                            <span class="text-purple-800 text-lg font-semibold block pt-4"> <%= el.dishIngredients.length %> Ingredients:</span>
+                            
+                            <!-- Iterate through the dishIngredients array and place each item in an li element: -->
+                            <ul>
+                                <% el.dishIngredients.forEach(function(item,index){ %>
+                                    <li><%=`- ${item}`%></li>
+                                <% }) %>
+                            </ul>
+
+                            <a href="/ingredients/<%=el._id %>" class="block w-20 my-3 bg-purple-400 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-md cursor-pointer text-center">Add</a>
+
+                            <span class="inline-block pt-4 text-purple-800 text-lg font-semibold">Instructions: </span>
+                            <p><%= `${el.dishInstructions}` %></p>
+
+                            <span class="inline-block pt-4 text-purple-800 text-lg font-semibold">Cuisine: </span>
+                            <p> <%= `${el.dishCuisine}` %></p>
+
+                            <span class="inline-block pt-4 text-purple-800 text-lg font-semibold">Notes: </span>
+                            <p> <%= `${el.dishNotes}` %></p>
+
+                            <span class="inline-block pt-4 text-purple-800 text-lg font-semibold">First Cooked: </span>
+                            <p> <%= `${el.dateDishCookedOn.toDateString()}` %></p>
+
+                            <!-- <a href="/edit/<%=el._id %>">Edit Dish</a> -->
+                            <!-- <p class='del'>Remove Dish</p> -->
+                            <a class="fas fa-edit my-6 bg-purple-400 hover:bg-purple-800 text-violet-50 font-bold py-2 px-4 rounded-md cursor-pointer text-center self-start" href="/edit/<%=el._id %>"><i class=""></i></a>
+
+                            <p class='del fas fa-trash cursor-pointer my-6 bg-red-500 hover:bg-red-800 text-violet-50 font-bold py-2 px-4 rounded-md cursor-pointer text-center self-start'></p>
+
+                        </li>
+                <% }) %> 
+                </ul>
+            </div>
+        </div>
+    </div>
+        <%- include('partials/footer') -%>
+<style>
+/* Styling for star rating */
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset { 
+    margin: 0; 
+    padding: 0; 
+}
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 2em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: rgb(255, 255, 255); 
+ float: right; 
+}
+
+.star-rating {
+    margin: 5px;
+    font-size: 2em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+
+.fa-star {
+    color: #EA580C;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #fe2e2e;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #ff8595;  } 
+</style>
