@@ -13,7 +13,7 @@ Are you sick of having to scroll through a slow-loading ad-infested website and 
 
 ## Objectives
 
-- The objective of this project is to develop a full-stack CRUD application for practicing MVC architecture, authentication, and Tailwind CSS.
+- The objective of this project is to develop a full-stack CRUD application for something I'm passionate about while incorporating CRUD, MVC architecture, authentication, and Tailwind CSS. And that passion being able to easily look up ingredients while at the grocery store, and logging my recipes!!
 
 ---
 
