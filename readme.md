@@ -13,19 +13,19 @@ Are you sick of having to scroll through a slow-loading ad-infested website and 
 
 ## Objectives
 
-- Full-stack project to practice building with MVC architecture and auth.
+- The objective of this project is to develop a full-stack CRUD application for practicing MVC architecture, authentication, and Tailwind CSS.
 
 ---
 
 ## Who is this for? 
 
-- This is for developers learning to make simple full-stack apps. And for people that hate ad-infested websites to look up how to make guacamole.
+- This is for people that HATE ad-infested websites that force you to scroll through someone's life story just to look up how to make guacamole!! And of course for developers learning to make full-stack applications using Node, MongoDB, and JS templating (EJS). 
 
 ---
 
 ## Packages/Dependencies used 
 
-bcrypt, connect-mongo, dotenv, ejs, express, express-flash, express-session, mongodb, mongoose, morgan, passport, passport-local, validator, nodemon.
+bcrypt, connect-mongo, dotenv, ejs, express, express-flash, express-session, mongodb, mongoose, morgan, passport, passport-local, validator, nodemon, tailwindcss, postcss, and postcss-cli.
 
 ---
 
@@ -57,10 +57,10 @@ $ yarn dev
 ## Things to add
 
 - Create a `.env` file in the config directory and add the following as `key: value` :
-  - PORT: `2121` (Can be any port! Example: 3000) 
+  - PORT: `8500` (Can be any port! Example: 3000) 
   - DB_STRING: `your MongoDB database URI` 
 ---
  
 ## Optimizations:
 
-This application is a work in progress. I will update this section later!
+This application is currently in an MVP state, and is a work in progress. I will update this section later!
